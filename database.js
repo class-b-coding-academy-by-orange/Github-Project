@@ -13,34 +13,6 @@ db.once('open', function () {
   console.log('____________________________')
 });
 
-/*
-// Example schema
-let tasksSchema = new mongoose.Schema({
-  title: String,
-  age: Number,
-  isCompleted: Boolean,
-});
-
-// Example modal
-let Tasks = mongoose.model('tasks', tasksSchema);
-
-// Example function
-let getTasks = (cb) => {
-  Tasks.find({}, (err, data) => {
-    if (err) {
-      cb(err)
-    } else {
-      cb(data)
-    }
-  })
-}
-
-// example of module.export
-module.exports = {
-  getTasks
-}
-*/
-
 // Start your code below
 
 const reposSchema = new mongoose.Schema({
@@ -55,8 +27,10 @@ const getRepos = async () => {
   return await Repos.find({});
 } 
 
-const addRepo = async () => {
-  return await Repos.insertOne({});
+const addRepo = async (newRepo) => {
+  console.log('db data', newRepo);
+
+  return await Repos.create(newRepo);
 }
 
 const updateRepo = async (_id) => {

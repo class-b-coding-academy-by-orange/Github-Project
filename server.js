@@ -6,29 +6,22 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Start your code below
+
 app.get('/', (req, res) => {
   res.json('server is working');
 });
-
-/*
-//Example get request with database
-app.get('/tasks', (req, res) => {
-  mongo.getTasks((result) => {
-    res.json(result);
-  })
-});
-*/
-
-// Start your code below
 
 app.get('/repos', (req, res) => {
   console.log('get /repos');
   res.send('get /repos');
 });
 
-app.post('/repos', (req, res) => {
-  console.log('post /repos');
-  res.send('post /repos')
+app.post('/repos', async (req, res) => {
+  const newRepo = req.body;
+  const dbResponse =  await mongo.addRepo(newRepo);
+  
+  res.send(dbResponse);
 });
 
 app.put('/repos/:id', (req, res) => {
