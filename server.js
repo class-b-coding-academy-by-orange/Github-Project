@@ -21,10 +21,27 @@ app.get('/tasks', (req, res) => {
 
 // Start your code below
 
+app.get('/repos', (req, res) => {
+  console.log('get /repos');
+  res.send('get /repos');
+});
 
+app.post('/repos', (req, res) => {
+  console.log('post /repos');
+  res.send('post /repos')
+});
 
+app.put('/repos/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(`post /repos/${id}`);
+  res.send(`post /repos/${id}`);
+});
 
-
+app.delete('/repos/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(`post /repos/${id}`)
+  res.send(`post /repos/${id}`);
+});
 
 
 const PORT = process.env.PORT || 9000;
