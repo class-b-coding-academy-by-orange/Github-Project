@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongo = require("./database");
+const axios = require("axios");
 
 const app = express();
 app.use(express.json());
@@ -19,19 +20,6 @@ app.get('/tasks', (req, res) => {
 });
 
 ************************************************************
-
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const logger = require("morgan");
-const axios = require("axios");
-
-app.use(express.json());
-app.use(logger("dev"));
-app.use(cors());
-
-// const playersRouter = require("./routes/players");
-// app.use("/players", playersRouter);
 
 app.get("/:s", (req, res) => {
   let s = req.params.s;
@@ -76,5 +64,5 @@ module.exports = app;
 
 // Start your code below
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => console.log(`Server listening to ${PORT}`));
