@@ -6,34 +6,41 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Start your code below
 
 app.get('/', (req, res) => {
   res.json('server is working');
 });
 
-app.get('/repos', (req, res) => {
-  console.log('get /repos');
-  res.send('get /repos');
+app.get('/repos', async (req, res) => {
+  const dbResponse = await mongo.getRepos();
+  console.log('GET', dbResponse);
+  res.send(dbResponse);
 });
 
 app.post('/repos', async (req, res) => {
   const newRepo = req.body;
+
   const dbResponse =  await mongo.addRepo(newRepo);
-  
+  console.log('POST', dbResponse);
   res.send(dbResponse);
 });
 
-app.put('/repos/:id', (req, res) => {
+app.put('/repos/:id', async (req, res) => {
   const id = req.params.id;
-  console.log(`post /repos/${id}`);
-  res.send(`post /repos/${id}`);
+  const newRepoContent = req.body;
+
+  const dbResponse = await mongo.updateRepo(id, newRepoContent);
+  console.log('PUT', dbResponse);
+
+  res.send(dbResponse);
 });
 
-app.delete('/repos/:id', (req, res) => {
+app.delete('/repos/:id', async (req, res) => {
   const id = req.params.id;
-  console.log(`post /repos/${id}`)
-  res.send(`post /repos/${id}`);
+
+  const dbResponse = await mongo.deleteRepo(id);
+  console.log('DELETE', dbResponse);
+  res.send(dbResponse);
 });
 
 
