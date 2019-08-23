@@ -2,22 +2,50 @@ const express = require("express");
 const cors = require("cors");
 const mongo = require("./database");
 const axios = require("axios");
+// var bodyParser = require("body-parser");
 
 const app = express();
+
+// app.use(
+//   bodyParser.urlencoded({
+//     extended: true
+//   })
+// );
+
+// app.use(bodyParser.json());
+
 app.use(express.json());
+
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.json("server is working");
+  mongo.getIniRepos(result => {
+    res.json(result);
+  });
 });
 
+app.get("/Repos", (req, res) => {
+  mongo.getRepos(result => {
+    res.json(result);
+  });
+});
+
+app.get("/Repos", (req, res) => {
+  mongo.getRepos(result => {
+    res.json(result);
+  });
+});
+
+app.post("/data", (req, res) => {
+  let repo = req.body;
+  console.log(req.body);
+  mongo.postRepo(repo, result => {
+    res.json(result);
+  });
+});
 /*
 //Example get request with database
-app.get('/tasks', (req, res) => {
-  mongo.getTasks((result) => {
-    res.json(result);
-  })
-});
+
 
 ************************************************************
 
