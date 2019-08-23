@@ -12,31 +12,49 @@ class App extends Component {
   };
 
   getRepos = async () => {
-    console.log("get all repos app worked");
-
     const response = await axios.get("http://localhost:9000/repos");
-    console.log("GET REPOS RES", response);
-    this.setState({ repos: response.data });
+
+    if (response.status === 200) this.setState({ repos: response.data });
   };
 
   addRepo = async newRepo => {
     const response = await axios.post("http://localhost:9000/repos", newRepo);
-    console.log("ADD REPO RES", response);
-    // this.setState({ repos: response.data });
+
+    if (response.status === 200)
+      this.setState({ repos: [...this.state.repos, response.data] });
   };
 
   updateRepo = async (id, newState) => {
-    console.log("UPDATE REPO ID", id);
     const response = await axios.put("http://localhost:9000/repos/" + id, {
       state: newState
     });
-    console.log("UPDATE REPO RES", response);
+
+    if (response.status === 200 && response.data.nModified > 0)
+      if (
+        response.data.n === response.data.nModified &&
+        response.data.nModified === response.data.ok
+      )
+        this.setState({
+          repos: this.state.repos.map(repo => {
+            if (repo._id === id) repo.state = newState;
+            return repo;
+          })
+        });
   };
 
   deleteRepo = async id => {
-    console.log("DELETE REPO ID", id);
     const response = await axios.delete("http://localhost:9000/repos/" + id);
-    console.log("DELETE REPO RES", response);
+
+    if (response.status === 200 && response.data.deletedCount > 0)
+    if (
+      response.data.n === response.data.deletedCount &&
+      response.data.deletedCount === response.data.ok
+    )
+      this.setState({
+        repos: this.state.repos.filter(repo => {
+          if (repo._id !== id) return repo;
+        })
+      });
   };
 
   getReposApi = async usernameToSearchFor => {
