@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Search from "./components/Search";
+import Options from "./components/Options";
 import Table from "./components/Table";
 
 class App extends Component {
@@ -11,11 +11,37 @@ class App extends Component {
     searchedForUser: false
   };
 
-  getRepos = async usernameToSearchFor => {
+  getRepos = async () => {
+    console.log("get all repos app worked");
+
+    const response = await axios.get("http://localhost:9000/repos");
+    console.log("GET REPOS RES", response);
+    this.setState({ repos: response.data });
+  };
+
+  addRepo = async newRepo => {
+    const response = await axios.post("http://localhost:9000/repos", newRepo);
+    console.log("ADD REPO RES", response);
+    // this.setState({ repos: response.data });
+  };
+
+  updateRepo = async (id, newState) => {
+    console.log("UPDATE REPO ID", id);
+    const response = await axios.put("http://localhost:9000/repos/" + id, {
+      state: newState
+    });
+    console.log("UPDATE REPO RES", response);
+  };
+
+  deleteRepo = async id => {
+    console.log("DELETE REPO ID", id);
+    const response = await axios.delete("http://localhost:9000/repos/" + id);
+    console.log("DELETE REPO RES", response);
+  };
+
+  getReposApi = async usernameToSearchFor => {
     try {
-      const res = await axios.get(
-        `http://localhost:9000/repos/${usernameToSearchFor}`
-      );
+      const res = await axios.get(`http://localhost:9000/repos/`);
       console.log(res.data);
       if (res.data === "error") {
         this.setState({
@@ -50,12 +76,19 @@ class App extends Component {
   };
 
   render() {
-    const { getRepos, renderReposOrMessage } = this;
+    const { getRepos, addRepo, updateRepo, deleteRepo } = this;
+    const { repos } = this.state;
 
     return (
       <div className="container m-3">
-        <Search getRepos={getRepos} />
-        {renderReposOrMessage()}
+        <Options getRepos={getRepos} addRepo={addRepo} />
+        {repos.length > 0 ? (
+          <Table
+            repos={repos}
+            updateRepo={updateRepo}
+            deleteRepo={deleteRepo}
+          />
+        ) : null}
       </div>
     );
   }

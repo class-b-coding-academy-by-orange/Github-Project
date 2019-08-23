@@ -28,6 +28,7 @@ const getRepos = async () => {
 } 
 
 const addRepo = async (newRepo) => {
+  console.log('db newRepo', newRepo);
   return await Repos.create(newRepo);
 }
 
@@ -38,6 +39,7 @@ const updateRepo = async (_id, newRepoContent) => {
 const deleteRepo = async (_id) => {
   return await Repos.deleteOne({_id});
 }
+
 
 module.exports = {
   getRepos,
