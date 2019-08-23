@@ -12,36 +12,29 @@ app.get("/", (req, res) => {
 
 app.get("/repos", async (req, res) => {
   const dbResponse = await mongo.getRepos();
-  console.log("GET", dbResponse);
+
   res.send(dbResponse);
 });
 
 app.post("/repos", async (req, res) => {
   const newRepo = req.body;
-  console.log("post /repos newRepo:", newRepo);
-
   const dbResponse = await mongo.addRepo(newRepo);
-  console.log("post /repos response", dbResponse);
+
   res.send(dbResponse);
 });
 
 app.put("/repos/:id", async (req, res) => {
   const id = req.params.id;
   const newRepoContent = req.body;
-
-  console.log('newRepo content', newRepoContent);
-
   const dbResponse = await mongo.updateRepo(id, newRepoContent);
-  console.log("PUT", dbResponse);
 
   res.send(dbResponse);
 });
 
 app.delete("/repos/:id", async (req, res) => {
   const id = req.params.id;
-
   const dbResponse = await mongo.deleteRepo(id);
-  console.log("DELETE", dbResponse);
+
   res.send(dbResponse);
 });
 

@@ -13,7 +13,6 @@ db.once('open', function () {
   console.log('____________________________')
 });
 
-// Start your code below
 
 const reposSchema = new mongoose.Schema({
   title: String,
@@ -28,7 +27,6 @@ const getRepos = async () => {
 } 
 
 const addRepo = async (newRepo) => {
-  console.log('db newRepo', newRepo);
   return await Repos.create(newRepo);
 }
 
