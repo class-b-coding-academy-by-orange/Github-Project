@@ -38,8 +38,14 @@ app.get("/Repos", (req, res) => {
 
 app.post("/data", (req, res) => {
   let repo = req.body;
-  console.log(req.body);
   mongo.postRepo(repo, result => {
+    res.json(result);
+  });
+});
+
+app.post("/data1", (req, res) => {
+  let repo = req.body;
+  mongo.postOneRepo(repo, result => {
     res.json(result);
   });
 });

@@ -25,16 +25,16 @@ class mainApp extends Component {
   };
 
   componentDidMount = () => {
-    fetch("http://localhost:9000/")
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        this.setState({
-          githubData: responseJson,
-          UserFound: true,
-          reposExist: true
-        });
+    axios.get("http://localhost:9000/").then(responseJson => {
+      console.log(responseJson.data);
+      console.log("this.state");
+      this.setState({
+        githubData: responseJson.data,
+        UserFound: true,
+        reposExist: true
       });
+    });
+    console.log("sync");
   };
 
   getData = () => {

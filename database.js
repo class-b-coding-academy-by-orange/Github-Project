@@ -27,20 +27,28 @@ let getIniRepos = cb => {
   getRepos(cb);
 };
 
-let getRepos = cb => {
-  Repos.find({}, (err, data) => {
-    if (err) {
-      cb(err);
-    } else {
-      cb(data);
-    }
-  });
+let getRepos = async cb => {
+  try {
+    console.log("1");
+    let allRepos = await Repos.find({});
+    console.log("2");
+    cb(allRepos);
+    console.log("3");
+  } catch (error) {
+    cb(error);
+  }
 };
 
 let postRepo = (repo, cb) => {
   Repos.insertMany(repo, function(error, docs) {});
-
   getRepos(cb);
+};
+
+let postOneRepo = (repo, cb) => {
+  let newrepo = new Repos(repo);
+  newrepo.save(function(error, docs) {
+    getRepos(cb);
+  });
 };
 
 let arr = [
@@ -64,7 +72,8 @@ let arr = [
 module.exports = {
   getRepos,
   getIniRepos,
-  postRepo
+  postRepo,
+  postOneRepo
 };
 
 // Start your code below
