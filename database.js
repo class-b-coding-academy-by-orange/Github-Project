@@ -44,3 +44,55 @@ module.exports = {
 // Start your code below
 
 
+let tasksSchema = new mongoose.Schema({
+  title: String,
+  language: String,
+  status: Boolean,
+});
+
+let Tasks = mongoose.model('tasks', tasksSchema);
+
+let creatTasks = (cb) => {
+  Tasks.create({title: "array",
+    language: "HTML",
+    status: true,},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(data)
+    }
+  })
+}
+
+
+let getTasks = (cb) => {
+  Tasks.find({}, (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(data)
+    }
+  })
+}
+
+let newcreate = (cb,title,language,status) => {
+  console.log(title,language,status)
+  console.log(title)
+  Tasks.create({title: title,
+  language:language,
+status:status},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(data)
+    }
+  })
+}
+
+module.exports = {
+  creatTasks,
+  getTasks,
+  newcreate,
+}
