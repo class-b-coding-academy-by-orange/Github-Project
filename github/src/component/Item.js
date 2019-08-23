@@ -9,6 +9,9 @@ import React, { Component } from 'react';
 export default class Item extends Component {
 
 
+ 
+
+
     render() {
         const {it,n}=this.props;
       return (
@@ -17,17 +20,13 @@ export default class Item extends Component {
               <td>{n+1}</td>
        <td>{it.title}</td>
        <td>{it.status ? "private" : "public" }</td>
-       <td><input type="checkbox" defaultChecked={it.status}  /></td>
+       <td><input type="checkbox" defaultChecked={it.status} onClick={this.props.changestatus.bind(this,it._id,it.status)} /></td>
        <td>{it.status ? "yes" : "no" } </td>
        <td>{it.language}</td>
        <td><button onClick={this.props.deletdata.bind(this,it._id)} >Delet</button> </td>
        {/* <td>{it._id}</td> */}
        </tr>
     
-     
- 
       )
     }
-   
-   
   }

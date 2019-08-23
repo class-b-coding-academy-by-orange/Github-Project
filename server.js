@@ -52,13 +52,13 @@ app.post('/task/:title/:language/:status', (req, res) => {
   let language = encodeURIComponent(req.params.language);
   let status = encodeURIComponent(req.params.status);
  
-  console.log(title,language,status)
+  console.log("server",title,language,status)
   //console.log(title)
 
  // res.json(`server is working data => ${title} ${language} ${status}`)
  
 // console.log(req.body)
- console.log("helloooooooooooooooooooo")
+ console.log("helloooooooooooooooooooo server")
 
   mongo.newcreate((result) => {
      res.json(result);
@@ -69,12 +69,28 @@ app.post('/task/:title/:language/:status', (req, res) => {
 app.delete('/task/:id', (req, res) => {
 
   let id = encodeURIComponent(req.params.id);
-  console.log("id",id)
+  console.log("server","id",id)
 
   mongo.deletetask((result) => {
     res.json(result);
   },id)
 });
+
+
+app.put('/task/:id/:status', (req, res) => {
+
+  let id = encodeURIComponent(req.params.id);
+  let status = encodeURIComponent(req.params.status);
+
+  console.log("server","id",id)
+  console.log("server","status",status)
+
+  mongo.updatetask((result) => {
+    res.json(result);
+  },id,status)
+});
+
+
 
 
 const PORT = process.env.PORT || 9000;

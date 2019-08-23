@@ -64,7 +64,6 @@ change=async (e)=>{
 
         </div>
 
-
         <table style={{ width: '100%', border: "1px solid black" }}>
           <thead>
 
@@ -84,7 +83,7 @@ change=async (e)=>{
 
             {this.props.repo.map((item, Key) => {
 
-              return <Item it={item} key={Key} n={Key} deletdata={this.props.deletdata} />
+              return <Item it={item} key={Key} n={Key} deletdata={this.props.deletdata} changestatus={this.props.updatedata} />
             })}
 
           </tbody>

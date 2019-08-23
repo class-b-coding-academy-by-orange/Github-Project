@@ -77,8 +77,8 @@ let getTasks = (cb) => {
 }
 
 let newcreate = (cb,title,language,status) => {
-  console.log(title,language,status)
-  console.log(title)
+  console.log("mongo",title,language,status)
+  console.log("mongo", title)
   Tasks.create({title: title,
   language:language,
 status:status},
@@ -86,14 +86,14 @@ status:status},
     if (err) {
       cb(err)
     } else {
-      cb(data)
+      getTasks(cb);
     }
   })
 }
 
 
 let deletetask = (cb,id) => {
-  console.log("id",id)
+  console.log("mongo", "id",id)
   Tasks.deleteOne({_id: id,},
      (err, data) => {
     if (err) {
@@ -105,10 +105,26 @@ let deletetask = (cb,id) => {
   })
 }
 
+let updatetask = (cb,id,status) => {
+  console.log( "mongo", "id",id)
+  console.log("mongo", "status",status)
+
+  Tasks.updateOne({_id: id,}, { $set: { status: status } },
+
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getTasks(cb);
+      console.log("mongo","status 2",status)     
+    }
+  })
+}
 
 module.exports = {
   creatTasks,
   getTasks,
   newcreate,
   deletetask,
+  updatetask,
 }

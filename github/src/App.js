@@ -16,16 +16,16 @@ state={
       .then(response => {
         this.setState({ repo: response.data })
         //console.log(this.state.repo)
-        console.log("1")
+        console.log("react","1")
       })
       .catch(error => {
-        console.error("eror")
+        console.error("react","eror")
       });
   }
 
 
   adddata = (title, language, status,reset) => {
-    console.log(title, language, status)
+    console.log("react",title, language, status)
     title = encodeURIComponent(title);
     language = encodeURIComponent(language);
     status = encodeURIComponent(status);
@@ -33,17 +33,17 @@ state={
     axios.post(`http://localhost:9000/task/${title}/${language}/${status}`)
 
       .then(response => {
-        console.log("complet add")
+        console.log("react","complet add")
       })
       .catch(error => {
-        console.error("not complet add")
+        console.error("react","not complet add")
       });
       reset()
   }
 
 
   deletdata = (id) => {
-    console.log(id)
+    console.log("react",id)
     id = encodeURIComponent(id);
 
     axios.delete(`http://localhost:9000/task/${id}`)
@@ -51,12 +51,25 @@ state={
       .then(response => {
         // this.setState({ repo: response.data })
         //console.log(this.state.repo)
-        console.log("complet delet")
+        console.log("react","complet delet")
 
       })
-     
-  }
+    }
 
+    updatedata = (id,status) => {
+    console.log("react",id,status)
+    id = encodeURIComponent(id);
+    status = encodeURIComponent(!status);
+
+    axios.put(`http://localhost:9000/task/${id}/${status}`)
+
+      .then(response => {
+        // this.setState({ repo: response.data })
+        //console.log(this.state.repo)
+        console.log("react", "complet update")
+
+      })
+    }
 
 
 
@@ -64,6 +77,6 @@ state={
     return (
       <div>
     <center><button type="button" className="btn btn-info btn-rounded" onClick={this.getdata} >Get All Repo</button> </center> 
-       <Table repo={this.state.repo} adddata={this.adddata} deletdata={this.deletdata}/>
+       <Table repo={this.state.repo} adddata={this.adddata} deletdata={this.deletdata} updatedata={this.updatedata}/>
       </div>
     )}}
