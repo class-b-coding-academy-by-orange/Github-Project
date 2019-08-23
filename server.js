@@ -53,5 +53,16 @@ app.delete("/deleteData/:id", (req, res) => {
   });
 });
 
+app.put("/updateData/:id/:value", (req, res) => {
+  console.log("id", req.params.id);
+  mongo.updateTask(
+    { _id: req.params.id },
+    { $set: { isPrivate: req.params.value } },
+    result => {
+      res.json(result);
+    }
+  );
+});
+
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => console.log(`Server listening to ${PORT}`));

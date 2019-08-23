@@ -33,7 +33,8 @@ class Table extends Component {
             margin: "auto",
             maxWidth: "400px",
             marginTop: "20px",
-            minWidth: "320px"
+            minWidth: "320px",
+            padding: "13px"
           }}
         >
           <label htmlFor="title">Repo title: </label>
@@ -115,6 +116,7 @@ class Table extends Component {
                     ID={index + 1}
                     key={index}
                     deleteData={this.props.deleteData}
+                    updateData={this.props.updateData}
                   />
                 </tr>
               ))}

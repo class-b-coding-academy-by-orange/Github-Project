@@ -37,6 +37,17 @@ class App extends Component {
     });
   };
 
+  updateData = (ID, value) => {
+    console.log(ID);
+    console.log(value);
+    value = !value;
+    axios
+      .put(`http://localhost:9000/updateData/${ID}/${value}`)
+      .then(response => {
+        this.setState({ allData: response.data });
+      });
+  };
+
   render() {
     return (
       <>
@@ -45,6 +56,7 @@ class App extends Component {
           getData={this.getData}
           allData={this.state.allData}
           deleteData={this.deleteData}
+          updateData={this.updateData}
         />
       </>
     );

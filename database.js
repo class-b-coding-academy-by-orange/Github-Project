@@ -85,8 +85,23 @@ let deleteTask = (delId, cb) => {
     }
   });
 };
+
+let updateTask = (updateID, value, cb) => {
+  console.log("ID", updateID);
+  console.log("value", value);
+  console.log("cb", cb);
+
+  Tasks.updateOne(updateID, value, (err, data) => {
+    if (err) {
+      cb(err);
+    } else {
+      getTask(cb);
+    }
+  });
+};
 module.exports = {
   createTask,
   getTask,
-  deleteTask
+  deleteTask,
+  updateTask
 };
