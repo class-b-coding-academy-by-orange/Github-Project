@@ -42,10 +42,28 @@ state={
   }
 
 
+  deletdata = (id) => {
+    console.log(id)
+    id = encodeURIComponent(id);
+
+    axios.delete(`http://localhost:9000/task/${id}`)
+
+      .then(response => {
+        // this.setState({ repo: response.data })
+        //console.log(this.state.repo)
+        console.log("complet delet")
+
+      })
+     
+  }
+
+
+
+
   render() {
     return (
       <div>
     <center><button type="button" className="btn btn-info btn-rounded" onClick={this.getdata} >Get All Repo</button> </center> 
-       <Table repo={this.state.repo} adddata={this.adddata}/>
+       <Table repo={this.state.repo} adddata={this.adddata} deletdata={this.deletdata}/>
       </div>
     )}}

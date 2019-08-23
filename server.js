@@ -44,6 +44,7 @@ app.get('/task', (req, res) => {
 });
 
 
+
 app.post('/task/:title/:language/:status', (req, res) => {
  // app.post('/task/:title', (req, res) => {
 
@@ -63,6 +64,18 @@ app.post('/task/:title/:language/:status', (req, res) => {
      res.json(result);
    },title,language,status)
 });
+
+
+app.delete('/task/:id', (req, res) => {
+
+  let id = encodeURIComponent(req.params.id);
+  console.log("id",id)
+
+  mongo.deletetask((result) => {
+    res.json(result);
+  },id)
+});
+
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => console.log(`Server listening to ${PORT}`));

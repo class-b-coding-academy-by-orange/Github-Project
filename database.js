@@ -91,8 +91,24 @@ status:status},
   })
 }
 
+
+let deletetask = (cb,id) => {
+  console.log("id",id)
+  Tasks.deleteOne({_id: id,},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getTasks(cb);
+
+    }
+  })
+}
+
+
 module.exports = {
   creatTasks,
   getTasks,
   newcreate,
+  deletetask,
 }

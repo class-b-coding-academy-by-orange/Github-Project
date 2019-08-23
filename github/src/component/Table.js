@@ -84,7 +84,7 @@ change=async (e)=>{
 
             {this.props.repo.map((item, Key) => {
 
-              return <Item it={item} key={Key} n={Key} />
+              return <Item it={item} key={Key} n={Key} deletdata={this.props.deletdata} />
             })}
 
           </tbody>
