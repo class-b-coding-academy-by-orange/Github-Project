@@ -8,8 +8,6 @@ class Search extends Component {
     const language = this.languageInput.value;
     const state = this.statusInput.value;
 
-    console.log('TITLE, LANGUAGE, STATUS: ', title, language, state);
-
     if (title.length > 0 && language.length > 0 && state !== "default") 
       this.props.addRepo({ title, language, state });
   };

@@ -57,42 +57,6 @@ class App extends Component {
       });
   };
 
-  getReposApi = async usernameToSearchFor => {
-    try {
-      const res = await axios.get(`http://localhost:9000/repos/`);
-      console.log(res.data);
-      if (res.data === "error") {
-        this.setState({
-          repos: [],
-          searchedForUser: false,
-          userFound: false
-        });
-      } else if (res.data.length === 0)
-        this.setState({
-          repos: [],
-          searchedForUser: true,
-          userFound: false
-        });
-      else if (res.data.length > 0)
-        this.setState({
-          repos: res.data,
-          searchedForUser: true,
-          userFound: true
-        });
-    } catch (err) {
-      console.log(err);
-      this.setState({ repos: [], searchedForUser: true, userFound: false });
-    }
-  };
-
-  renderReposOrMessage = () => {
-    const { userFound, searchedForUser } = this.state;
-
-    if (!searchedForUser) return "";
-    else if (userFound) return <Table repos={this.state.repos} />;
-    else return <h3 className="m-5">User is not found!</h3>;
-  };
-
   render() {
     const { getRepos, addRepo, updateRepo, deleteRepo } = this;
     const { repos } = this.state;

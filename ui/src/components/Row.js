@@ -5,7 +5,6 @@ export class Row extends Component {
     const { number, updateRepo, deleteRepo } = this.props;
     const { _id, title, language, state } = this.props.repo;
 
-    console.log('STATE', state);
     return (
       <tr>
         <th scope="row">{number}</th>
