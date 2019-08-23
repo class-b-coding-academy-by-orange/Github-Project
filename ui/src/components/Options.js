@@ -8,8 +8,12 @@ class Search extends Component {
     const language = this.languageInput.value;
     const state = this.statusInput.value;
 
-    if (title.length > 0 && language.length > 0 && state !== "default") 
+    if (title.length > 0 && language.length > 0 && state !== "")
       this.props.addRepo({ title, language, state });
+
+    this.titleInput.value = "";
+    this.languageInput.value = "";
+    this.statusInput.value = "";
   };
 
   render() {
@@ -44,7 +48,7 @@ class Search extends Component {
               className="custom-select m-1"
               ref={elem => (this.statusInput = elem)}
             >
-              <option value="default">Repo Status (Private/Public)</option>
+              <option value="">Repo Status (Private/Public)</option>
               <option value="true">Private</option>
               <option value="false">Public</option>
             </select>
