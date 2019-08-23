@@ -11,6 +11,14 @@ class App extends Component {
     searchedForUser: false
   };
 
+  isSucceeded(res, key) {
+    if (res.status === 200 && res.data[key] > 0)
+      if (res.data.n === res.data[key] && res.data[key] === res.data.ok)
+        return true;
+
+    return false;
+  }
+
   getRepos = async () => {
     const response = await axios.get("http://localhost:9000/repos");
 
@@ -29,32 +37,24 @@ class App extends Component {
       state: newState
     });
 
-    if (response.status === 200 && response.data.nModified > 0)
-      if (
-        response.data.n === response.data.nModified &&
-        response.data.nModified === response.data.ok
-      )
-        this.setState({
-          repos: this.state.repos.map(repo => {
-            if (repo._id === id) repo.state = newState;
-            return repo;
-          })
-        });
+    if (this.isSucceeded(response, "nModified")) {
+      this.setState({
+        repos: this.state.repos.map(repo => {
+          if (repo._id === id) repo.state = newState;
+          return repo;
+        })
+      });
+    }
   };
 
   deleteRepo = async id => {
     const response = await axios.delete("http://localhost:9000/repos/" + id);
 
-    if (response.status === 200 && response.data.deletedCount > 0)
-    if (
-      response.data.n === response.data.deletedCount &&
-      response.data.deletedCount === response.data.ok
-    )
+    if (this.isSucceeded(response, "deletedCount")) {
       this.setState({
-        repos: this.state.repos.filter(repo => {
-          if (repo._id !== id) return repo;
-        })
+        repos: this.state.repos.filter(repo => repo._id !== id)
       });
+    }
   };
 
   render() {
