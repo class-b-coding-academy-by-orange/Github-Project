@@ -8,7 +8,7 @@ class App extends Component {
   state = {
     repos: []
   };
-
+ 
   getRepos = () => {
     axios
       .get("http://localhost:9000/repo")
@@ -29,6 +29,15 @@ class App extends Component {
         console.log(err);
       })
   };
+  updateRepo=id=>{
+    axios.put("http://localhost:9000/repo"+id)
+    .then(res=>{
+      // this.setState({repos:res.data.map(repo => (repo._id === id) ? repo.state=   )})
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  };
 
   deleteRepo = id => {
     axios.delete("http://localhost:9000/repo/" + id)
@@ -41,11 +50,14 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.repos)
+    const {addRepo,deleteRepo,getRepos,updateRepo} = this;
+    const {repos} = this.state;
     return (
       <div>
-        <AddRepo addRepo={this.addRepo} />
-        <GetAllRepo getRepos={this.getRepos} />
-        <Table repos={this.state.repos} deleteRepo={this.deleteRepo} />
+        <AddRepo addRepo={addRepo} />
+        <GetAllRepo getRepos={getRepos} />
+        <Table repos={repos} deleteRepo={deleteRepo}  updateRepo={updateRepo} />
       </div>
     );
   }

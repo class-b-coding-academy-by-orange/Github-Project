@@ -7,6 +7,7 @@ export default class AddRepo extends Component {
     const title = document.getElementById('title').value;
     const language = document.getElementById('language').value;
     const state = document.getElementById('state').value;
+  //  console.log(state)
 
     if (title.length > 0 && language.length > 0 && state !== "")
       this.props.addRepo({ title, language, state });
@@ -38,8 +39,8 @@ export default class AddRepo extends Component {
               id="state"
               className="custom-select m-2"
             >
-              <option value="true">Private</option>
-              <option value="false">Public</option>
+              <option value='true' >Private</option>
+              <option value='false' >Public</option>
             </select>
             <button
               className="btn btn-outline-success btn-lg"

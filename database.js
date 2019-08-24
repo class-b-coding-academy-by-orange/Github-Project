@@ -67,7 +67,7 @@ let addRepo = (newRepo, cb) => {
 };
 
 let updateRepo = (id, cb) => {
-  Repos.updateOne(id, (err, data) => {
+  Repos.updateOne({_id: id}, (err, data) => {
     if (err) {
       console.log(err);
     }
