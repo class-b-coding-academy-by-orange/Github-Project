@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Item from './Item';
+import { Table } from 'react-bootstrap';
 
 
 
-export default class Table extends Component {
+export default class Tablee extends Component {
 
   state={
     title: "",
@@ -46,25 +47,21 @@ change=async (e)=>{
 
         <>
         <div>
-        {/* <form action="/task" method="POST" > */}
-         {/* <form> */}
+        
           <input name="title" className="mb-3" placeholder="repo title" value={title} onChange={this.change} />
           <input name="language" className="mb-3" placeholder="repo language" value={language} onChange={this.change} />
-          {/* <input className="mb-3" placeholder="repo stutus" />  */}
         
           <select  name="Private" value={Private} onChange={this.change}>
           <option value="select">rebo status</option>
           <option value="Public">Public</option>
            <option  value="private"  >private</option>
-           
           </select>
 
           <button type="submit" className="btn btn-info btn-rounded" onClick={this.props.adddata.bind(this,title,language,status,this.reset)} >Add Repo</button>
-          {/* </form> */}
 
         </div>
-
-        <table style={{ width: '100%', border: "1px solid black" }}>
+        {/* style={{ width: '100%', border: "1px solid black" }} */}
+        <Table striped bordered hover variant="dark">
           <thead>
 
             <tr style={{ background:"blue" }}>
@@ -88,7 +85,7 @@ change=async (e)=>{
 
           </tbody>
 
-        </table>
+        </Table>
 
 
       </>

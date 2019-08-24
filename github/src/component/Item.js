@@ -21,7 +21,7 @@ export default class Item extends Component {
        <td>{it.title}</td>
        <td>{it.status ? "private" : "public" }</td>
        <td><input type="checkbox" defaultChecked={it.status} onClick={this.props.changestatus.bind(this,it._id,it.status)} /></td>
-       <td>{it.status ? "yes" : "no" } </td>
+       <td>{it.status ? "Yes" : "No" } </td>
        <td>{it.language}</td>
        <td><button onClick={this.props.deletdata.bind(this,it._id)} >Delet</button> </td>
        {/* <td>{it._id}</td> */}

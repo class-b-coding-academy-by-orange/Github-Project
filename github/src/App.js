@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import Table from './component/Table';
+import Tablee from './component/Tablee';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button'
 
 
 export default class App extends Component {
@@ -33,7 +34,9 @@ state={
     axios.post(`http://localhost:9000/task/${title}/${language}/${status}`)
 
       .then(response => {
-        console.log("react","complet add")
+        console.log("react","complet add");
+        this.setState({ repo: response.data })
+
       })
       .catch(error => {
         console.error("react","not complet add")
@@ -51,7 +54,9 @@ state={
       .then(response => {
         // this.setState({ repo: response.data })
         //console.log(this.state.repo)
-        console.log("react","complet delet")
+        console.log("react","complet delet");
+        this.setState({ repo: response.data })
+
 
       })
     }
@@ -66,7 +71,9 @@ state={
       .then(response => {
         // this.setState({ repo: response.data })
         //console.log(this.state.repo)
-        console.log("react", "complet update")
+        console.log("react", "complet update");
+        this.setState({ repo: response.data })
+
 
       })
     }
@@ -76,7 +83,9 @@ state={
   render() {
     return (
       <div>
-    <center><button type="button" className="btn btn-info btn-rounded" onClick={this.getdata} >Get All Repo</button> </center> 
-       <Table repo={this.state.repo} adddata={this.adddata} deletdata={this.deletdata} updatedata={this.updatedata}/>
+      <br></br>
+       <Tablee repo={this.state.repo} adddata={this.adddata} deletdata={this.deletdata} updatedata={this.updatedata}/>
+      <Button variant="outline-primary"  size="lg" block  onClick={this.getdata} >Get All Repo</Button>
+
       </div>
     )}}
