@@ -44,3 +44,92 @@ module.exports = {
 // Start your code below
 
 
+let ReposSchema = new mongoose.Schema({
+  title: String,
+  language: String,
+  state: Boolean,
+});
+
+const Repos = mongoose.model('Repos', ReposSchema);
+
+
+//inital value
+// let createRepos = (cb) => {
+//   Repos.create({title: "array",
+//     language: "HTML",
+//     status: true,},
+//      (err, data) => {
+//     if (err) {
+//       cb(err)
+//     } else {
+//       cb(data)
+//     }
+//   })
+// }
+
+
+//get and show the data (find)
+let getRepos = (cb) => {
+  Repos.find({}, (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(data)
+    }
+  })
+}
+
+
+//create (post/insert) new data
+let newRepos = (cb,title,language,status) => {
+
+  Repos.create({title: title,
+  language:language,
+status:status},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getRepos(cb);
+    }
+  })
+}
+
+
+//delete
+let deleteRepos = (cb,id) => {
+  Repos.deleteOne({_id: id},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getRepos(cb);
+
+    }
+  })
+}
+
+
+
+//put (update/edit) the data
+let updateRepos = (cb,id,status) => {
+
+  Repos.updateOne({_id: id,}, { $set: { status: status } },
+
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getRepos(cb);
+    }
+  })
+}
+
+
+
+module.exports = {
+  getRepos,
+  newRepos,
+  deleteRepos,
+  updateRepos,
+}
