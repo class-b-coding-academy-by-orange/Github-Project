@@ -80,7 +80,7 @@ let postdata=(row,cb)=>{
     }
     else
     {
-    cb(data)
+    getdata(cb)
     console.log(data)
     
     }
