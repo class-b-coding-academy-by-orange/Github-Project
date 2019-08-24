@@ -50,7 +50,7 @@ request=()=>{
        
        console.log(res)
        alert("your New Reop was Added succufly" )
-     this.setState({res:[res.data]})
+     this.setState({res:res.data})
      console.log(this.state)
      
     })
