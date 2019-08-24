@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
 
 export default class Row extends Component {
-
-    render() {
-                const {repo,number} = this.props
-        return (
-
-
-            <tr>
-                <td class="bg-primary">{number} </td>
-                <td class="bg-success">{repo}</td>
-                <td class="bg-warning">PRIVATE</td>
-                <td ><input type="checkbox" /></td>
-                <td class="bg-danger">YES</td>
-                <td class="bg-primary">HTML </td>
-                <td ><button type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button></td>
-
-            </tr>
-
-        )
-    }
-
-
+  render() {
+    const { number, deleteRepo } = this.props;
+    const { _id, title, language, state } = this.props.repo;
+    return (
+      <tr>
+        <td className="bg-primary">{number} </td>
+        <td className="bg-success">{title}</td>
+        <td className="bg-warning">{state ? "PRIVATE" : "PUBLIC"}</td>
+        <td>
+          <input type="checkbox"/>
+        </td>
+        <td className="bg-danger">{state ? "YES" : "NO"}</td>
+        <td className="bg-primary">{language}</td>
+        <td>
+          <button onClick={deleteRepo.bind(this, _id)} type="button" className="btn btn-warning btn-circle">
+            <i className="glyphicon glyphicon-remove" />
+          </button>
+        </td>
+      </tr>
+    );
+  }
 }
