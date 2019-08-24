@@ -21,10 +21,32 @@ app.get('/tasks', (req, res) => {
 
 // Start your code below
 
+app.get("/repo", async(req,res) =>{
+      const repoDB = await mongo.getRepos();
+      res.send(repoDB);
+
+})
 
 
+app.post ('/repo' , async(req,res) =>{
+  const repoDB = await mongo.addRepos();
+  res.send (repoDB);
+
+})
 
 
+app.put ('/repo/:id' , async(req,res) =>{
+  const repoDB = await mongo.updateRepos();
+  res.send (repoDB);
+
+})
+
+
+app.delete ('/repo/:id' ,async (req,res) =>{
+  const repoDB = await mongo.deleteRepos();
+  res.send (repoDB);
+
+})
 
 
 const PORT = process.env.PORT || 9000;

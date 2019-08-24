@@ -42,5 +42,45 @@ module.exports = {
 */
 
 // Start your code below
+const repoSchema = new mongoose.Schema({
+  title : String,
+  language : String,
+  status : Boolean
+
+});
+
+let Repos = new mongoose.model('repo',repoSchema) ;
+
+
+let getRepos = async () => {
+  return await Repos.find({});
+} 
+
+let addRepo = async () =>{
+
+  return await Repos.create(newRepo)
+}
+
+let updateRepo = async (id,updateRepo)=>{
+
+  return await Repos.updateone(id,updateRepo)
+}
+
+
+let deleteRepo = async (id,deleteRepo) =>{
+
+  return await Repos.deleteone(id,deleteRepo)
+}
+
+
+
+
+
+module.exports = {
+  getRepos,
+  addRepo,
+  updateRepo,
+  deleteRepo
+}
 
 
