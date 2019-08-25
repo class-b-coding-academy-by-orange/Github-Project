@@ -26,7 +26,7 @@ export default class RowRepos extends Component {
 
           /></td>
 
-          <td>{repo.state ? "TRUE" : "FALSE"}</td>
+          <td>{repo.state ? "YES" : "NO"}</td>
           <td>{repo.language}</td>
 
 
