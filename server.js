@@ -35,9 +35,13 @@ app.post("/repo", (req, res) => {
 });
 
 app.put("/repo/:id", (req, res) => {
+    console.log('put')
   let id = req.params.id;
-  mongo.updateRepo(id, result => {
-    res.send(result);
+  let status = req.body.status;
+  console.log('put',id)
+  mongo.updateRepo(id,status, result => {
+    // console.log(res)
+    res.json(result);
   });
 });
 

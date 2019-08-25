@@ -3,7 +3,7 @@ import Row from "./Row";
 
 export default class Table extends Component {
   render() {
-    const { repos, deleteRepo } = this.props;
+    const { repos, deleteRepo,updateRepo } = this.props;
 
     return (
       <div>
@@ -26,7 +26,7 @@ export default class Table extends Component {
                   key={repo._id}
                   number={index + 1}
                   repo={repo}
-                  //   updateRepo={updateRepo}
+                  updateRepo={updateRepo}
                   deleteRepo={deleteRepo}
                 />
               );

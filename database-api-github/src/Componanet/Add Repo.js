@@ -6,11 +6,11 @@ export default class AddRepo extends Component {
 
     const title = document.getElementById('title').value;
     const language = document.getElementById('language').value;
-    const state = document.getElementById('state').value;
+    const status = document.getElementById('status').value;
   //  console.log(state)
 
-    if (title.length > 0 && language.length > 0 && state !== "")
-      this.props.addRepo({ title, language, state });
+    if (title.length > 0 && language.length > 0 && status !== "")
+      this.props.addRepo({ title, language, status });
   };
 
   render() {
@@ -36,7 +36,7 @@ export default class AddRepo extends Component {
               placeholder="Repository language"
             />
             <select
-              id="state"
+              id="status"
               className="custom-select m-2"
             >
               <option value='true' >Private</option>

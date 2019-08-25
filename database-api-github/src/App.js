@@ -23,16 +23,17 @@ class App extends Component {
   addRepo = newRepo => {
     axios.post("http://localhost:9000/repo", newRepo)
       .then(res => {
-        this.setState({ repos: [...this.state.repos, res.data] });
+        this.setState({ repos: [...this.state.repos,res.data] });
       })
       .catch(err => {
         console.log(err);
       })
   };
-  updateRepo=id=>{
-    axios.put("http://localhost:9000/repo"+id)
-    .then(res=>{
-      // this.setState({repos:res.data.map(repo => (repo._id === id) ? repo.state=   )})
+  updateRepo= (id,status) =>{
+       axios.put(`http://localhost:9000/repo/${id}/`,{status:!status})
+       .then(res=>{ 
+         console.log(res)
+         this.setState({repos: res.data})
     })
     .catch(err=>{
       console.log(err)

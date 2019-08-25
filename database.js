@@ -42,13 +42,13 @@ module.exports = {
 */
 
 // Start your code below
-const repoSchema = new mongoose.Schema({
+const repo = new mongoose.Schema({
   title: String,
   language: String,
   status: Boolean
 });
 
-let Repos = new mongoose.model("repo", repoSchema);
+let Repos = new mongoose.model("repo", repo);
 
 let getRepos = cb => {
   Repos.find({}, (err, data) => {
@@ -65,18 +65,22 @@ let addRepo = (newRepo, cb) => {
     cb(data);
   });
 };
-
-let updateRepo = (id, cb) => {
-  Repos.updateOne({_id: id}, (err, data) => {
+let updateRepo = (id,status,cb) => {
+  console.log(cb) 
+  Repos.updateOne({_id:id},{$set:{status:status}}, (err, data) => {
     if (err) {
-      console.log(err);
+      cb(err);
+    }else{
+    console.log('update correct') 
+    console.log(data)
+    getRepos(cb)
     }
-    cb(data);
   });
-};
+}
 
 let deleteRepo = (id, cb) => {
-  Repos.deleteOne({_id: id}, (err, data) => {
+    Repos.deleteOne({_id: id}, (err, data) => {
+   
     if (err) {
       console.log(err);
     }
