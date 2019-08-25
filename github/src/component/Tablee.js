@@ -10,7 +10,7 @@ export default class Tablee extends Component {
     title: "",
     language: "",
     Private: "",
-    status: null,
+    status: true,
 }
 
 
@@ -46,20 +46,24 @@ change=async (e)=>{
       return (
 
         <>
-        <div>
+       <center> <div style={{  width:"auto" }}>
         
           <input name="title" className="mb-3" placeholder="repo title" value={title} onChange={this.change} />
-          <input name="language" className="mb-3" placeholder="repo language" value={language} onChange={this.change} />
-        
-          <select  name="Private" value={Private} onChange={this.change}>
+           <br></br>
+           <input name="language" className="mb-3" placeholder="repo language" value={language} onChange={this.change} />
+           <br></br>
+
+          <select  name="Private" value={Private} onChange={this.change} >
           <option value="select">rebo status</option>
           <option value="Public">Public</option>
-           <option  value="private"  >private</option>
+           <option  value="private" >private</option>
           </select>
 
           <button type="submit" className="btn btn-info btn-rounded" onClick={this.props.adddata.bind(this,title,language,status,this.reset)} >Add Repo</button>
 
         </div>
+        </center>
+        <br></br>
         {/* style={{ width: '100%', border: "1px solid black" }} */}
         <Table striped bordered hover variant="dark">
           <thead>
