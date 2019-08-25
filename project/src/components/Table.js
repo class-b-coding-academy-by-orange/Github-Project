@@ -8,7 +8,6 @@ export default class Table extends Component {
   state = {
     title: "",
     language: "",
-    // Private: true,
     status: false
   }
 
@@ -20,21 +19,12 @@ export default class Table extends Component {
       [e.target.name]: e.target.value,
     });
 
-    // if(this.state.status==="private")
-    //   {
-    //     this.setState({status : true})
-    //   }
-    // if(this.state.status==="Public")
-    //   {
-    //     this.setState({status : false});
-    //   }
   }
 
   resetRepos = () => {
     this.setState({
       title: "",
       language: "",
-      // Private: "",
       status: null
     })
   }

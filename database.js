@@ -54,7 +54,6 @@ const Repos = mongoose.model('Repos', ReposSchema);
 
 
 
-
 //get and show the data (find)
 let getRepos = (cb) => {
   Repos.find({}, (err, data) => {
@@ -69,16 +68,20 @@ let getRepos = (cb) => {
 
 //create (post/insert) new data
 let newRepos = (cb,title,language,status) => {
-console.log('status datbase:',status)
-  Repos.create({title: title,language:language,status:status}, (err, data) => {
+
+  Repos.create({title: title,
+  language:language,
+status:status},
+     (err, data) => {
     if (err) {
       cb(err)
     } else {
-      console.log('data:',data)
       getRepos(cb);
     }
   })
 }
+
+
 //delete
 let deleteRepos = (cb,id) => {
   Repos.deleteOne({_id: id},

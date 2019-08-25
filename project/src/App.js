@@ -11,7 +11,7 @@ export default class App extends Component {
 
 
   getRepos = () => {
-    axios.get(`http://localhost:9000/Repos`)
+    axios.get(`http://localhost:9001/Repos`)
 
       .then(response => {
         this.setState({ repos: response.data })
@@ -46,10 +46,11 @@ export default class App extends Component {
   deleteRepos = (id) => {
     id = encodeURIComponent(id);
 
-    axios.delete(`http://localhost:9000/Repos/${id}`)
+    axios.delete(`http://localhost:9001/Repos/${id}`)
 
       .then(response => {
         console.log("the Repo deleted")
+        this.setState({ repos: response.data })
       })
     }
 
@@ -58,7 +59,7 @@ export default class App extends Component {
     id = encodeURIComponent(id);
     status = encodeURIComponent(!status);
 
-    axios.put(`http://localhost:9000/Repos/${id}/${status}`)
+    axios.put(`http://localhost:9001/Repos/${id}/${status}`)
 
       .then(response => {
         console.log("the Repo updated")
