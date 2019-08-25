@@ -47,10 +47,10 @@ export default class AddRepo extends Component {
                         <div className="form-group col-md-3">
                                 <select id="inputState" className="form-control"
                                 onChange={addRepo}
-                                name="state" value={state} style={{ width: '190px'}}>
-                                    <option value="" disabled selected >Select Repo Status</option>
-                                    <option value="Private">Private</option>
-                                    <option value="Public">Public</option>
+                                name="state" style={{ width: '190px'}}>
+                                    <option  selected disabled hidden>Select Repo Status</option>
+                                    <option value="true">Private</option>
+                                    <option value="false">Public</option>
                                 </select>
                         </div>
 
