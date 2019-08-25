@@ -1,17 +1,26 @@
 import React, { Component } from "react";
 
 class Search extends Component {
-  state = {
-    search: ""
+  state = {};
+
+  handleChangeName = e => {
+    this.setState({ name: e.target.value });
   };
 
-  handleChange = e => {
-    this.setState({ search: e.target.value });
+  handleChangeLang = e => {
+    this.setState({ language: e.target.value });
+  };
+
+  handleChangeState = e => {
+    let a = e.target.value;
+    console.log(a);
+    if (a === "true") this.setState({ state: true });
+    else this.setState({ state: false });
   };
 
   handleClick = () => {
-    console.log(this.state.search);
-    this.props.addRequest(this.state.search);
+    console.log(this.state);
+    this.props.AddRequest(this.state);
   };
 
   render() {
@@ -22,22 +31,28 @@ class Search extends Component {
             type="text"
             className="form-control"
             placeholder="Repo Title"
-            id="search"
-            value={this.state.search}
-            onChange={this.handleChange}
+            id="name"
+            // value={this.state.search}
+            onChange={this.handleChangeName}
           />
           <input
             type="text"
             className="form-control"
             placeholder="Repo Langauge"
-            id="search"
-            value={this.state.search}
-            onChange={this.handleChange}
+            id="language"
+            // value={this.state.search}
+            onChange={this.handleChangeLang}
           />
-          <select class="custom-select" id="inputGroupSelect01">
-            <option selected>Choose privacy</option>
-            <option value="1">Private</option>
-            <option value="2">Public</option>
+          <select
+            className="custom-select"
+            id="state"
+            onChange={this.handleChangeState}
+          >
+            <option disabled selected>
+              Choose privacy
+            </option>
+            <option value="true">Private</option>
+            <option value="false">Public</option>
           </select>
 
           <div className="input-group-append">

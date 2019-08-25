@@ -19,15 +19,18 @@ class Table extends Component {
 
         <tbody>
           {this.props.data.map((repo, index) => {
+            console.log(repo._id);
             return (
               <Row
                 id={index + 1}
+                deleteId={repo._id}
                 name={repo.name}
-                private={repo.private}
+                private={repo.state}
                 lang={repo.language}
                 link={repo.svn_url}
                 key={repo.id}
                 flip={this.props.flip}
+                delete={this.props.delete}
               />
             );
           })}

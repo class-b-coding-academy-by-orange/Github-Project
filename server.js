@@ -36,7 +36,7 @@ app.get("/Repos", (req, res) => {
   });
 });
 
-app.post("/data", (req, res) => {
+app.post("/add", (req, res) => {
   let repo = req.body;
   mongo.postRepo(repo, result => {
     res.json(result);
@@ -49,6 +49,22 @@ app.post("/data1", (req, res) => {
     res.json(result);
   });
 });
+
+app.delete("/delete/:id", function(req, res) {
+  let repoId = req.params.id;
+  console.log(repoId);
+  mongo.deleteRepo(repoId, result => {
+    res.json(result);
+  });
+});
+
+// app.delete("/data1", (req, res) => {
+//   let repo = req.body;
+//   mongo.postOneRepo(repo, result => {
+//     res.json(result);
+//   });
+// });
+
 /*
 //Example get request with database
 

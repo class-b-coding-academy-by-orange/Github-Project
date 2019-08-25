@@ -1,18 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 
-function Btn(props) {
-  console.log(props.link);
-  return (
-    <div>
-      <button
-        type="button"
-        className="btn btn-danger"
-        onClick={() => window.open(props.link, "_blank")}
-      >
-        Delete
-      </button>
-    </div>
-  );
+class Btn extends Component {
+  deleteHandler = e => {
+    console.log(e.target.id);
+    this.props.delete(e.target.id);
+  };
+
+  render() {
+    // console.log(this.props.deleteId);
+    return (
+      <div>
+        <button
+          id={this.props.deleteId}
+          type="button"
+          className="btn btn-danger"
+          onClick={this.deleteHandler}
+        >
+          Delete
+        </button>
+      </div>
+    );
+  }
 }
 
 export default Btn;

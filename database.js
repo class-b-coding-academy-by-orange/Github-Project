@@ -51,6 +51,20 @@ let postOneRepo = (repo, cb) => {
   });
 };
 
+let deleteRepo = (repoId, cb) => {
+  Repos.deleteOne({ _id: repoId }, function(err) {
+    if (err) return handleError(err);
+  });
+  getRepos(cb);
+};
+
+let updateRepo = (repoId, cb) => {
+  // Repos.findOneAndUpdate(repoId, update, {
+  //   state = !state
+  // });
+  // getRepos(cb);
+};
+
 let arr = [
   {
     name: "Array",
@@ -73,7 +87,9 @@ module.exports = {
   getRepos,
   getIniRepos,
   postRepo,
-  postOneRepo
+  postOneRepo,
+  deleteRepo,
+  updateRepo
 };
 
 // Start your code below

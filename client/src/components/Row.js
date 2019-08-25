@@ -4,11 +4,13 @@ import Btn from "./Btn";
 class Row extends Component {
   state = {};
 
-  handleToggle = index => {
-    this.props.flip(index - 1);
+  handleToggle = i => {
+    console.log(i);
+    this.props.flip(i);
   };
 
   render() {
+    // console.log(this.props.deleteId);
     return (
       <tr>
         <td> {this.props.id} </td>
@@ -28,7 +30,7 @@ class Row extends Component {
           <td>
             {" "}
             <input
-              onChange={() => this.handleToggle(this.props.id)}
+              onChange={() => this.handleToggle(this.props.deleteId)}
               type="checkbox"
               aria-label="Checkbox for following text input"
             />{" "}
@@ -37,7 +39,7 @@ class Row extends Component {
         {this.props.private ? <td> yes </td> : <td> no </td>}
         <td> {this.props.lang} </td>
         <td>
-          <Btn link={this.props.link} />
+          <Btn deleteId={this.props.deleteId} delete={this.props.delete} />
         </td>
       </tr>
     );

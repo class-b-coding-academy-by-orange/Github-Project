@@ -13,77 +13,113 @@ class mainApp extends Component {
 
   changePrivate = id => {
     console.log(id);
+    console.log(this.state.githubData);
+    // let i = this.state.githubData.map(
+    //   (elem,
+    //   index => {
+    //     if (elem._id === id) return index;
+    //   })
+    // );
+    // let p = this.state.githubData[i].state;
+    // console.log(p);
+    //   if ( ){
+    //   axios.put(`http://localhost:9000/apdate/${id}`, {
+    //     state: bar
+    // })}
+    // axios
+    //   .put("https://reqres.in/api/users/2", {
+    //     name: "Atta Shah",
+    //     job: "MEAN Stack Developer"
+    //   })
+    //   .then(response => {
+    //     console.log(response.data);
+    //     this.setState({
+    //       githubData: response.data
+    //     });
+    //   });
 
-    console.log(this.state.githubData[id]);
-    this.setState({
-      githubData: this.state.githubData.map((elem, index) => {
-        if (index === id) elem.private = !elem.private;
-        return elem;
-      })
-    });
-    console.log(this.state);
+    // this.setState({
+    //   githubData: this.state.githubData.map((elem, index) => {
+    //     if (index === id) elem.private = !elem.private;
+    //     return elem;
+    //   })
+    // });
+    // console.log(this.state);
   };
 
-  componentDidMount = () => {
-    axios.get("http://localhost:9000/").then(responseJson => {
-      console.log(responseJson.data);
-      console.log("this.state");
-      this.setState({
-        githubData: responseJson.data,
-        UserFound: true,
-        reposExist: true
-      });
-    });
-    console.log("sync");
-  };
+  // componentDidMount = () => {
+  //   let c = this.getData();
+  //   console.log(c);
+  //   if (this.getData() === [])
+  //     axios.get("http://localhost:9000/").then(responseJson => {
+  //       console.log(responseJson.data);
+  //       console.log("this.state");
+  //       this.setState({
+  //         githubData: responseJson.data,
+  //         UserFound: true,
+  //         reposExist: true
+  //       });
+  //     });
+  //   console.log("sync");
+  // };
 
   getData = () => {
     fetch("http://localhost:9000/Repos")
       .then(response => response.json())
       .then(responseJson => {
-        console.log(responseJson);
-        this.setState({
-          githubData: responseJson,
-          UserFound: true,
-          reposExist: true
-        });
+        // console.log(responseJson);
+        if (responseJson.length === 0) {
+          axios.get("http://localhost:9000/").then(responseJson => {
+            // console.log(responseJson.data);
+            // console.log("this.state");
+            this.setState({
+              githubData: responseJson.data,
+              UserFound: true,
+              reposExist: true
+            });
+          });
+        } else {
+          this.setState({
+            githubData: responseJson,
+            UserFound: true,
+            reposExist: true
+          });
+        }
       });
-    // this.AddRequest("orayb-alsmadi");
   };
-  //kdmlkncjs
+
   AddRequest = s => {
-    let request = `http://localhost:3001/${s}`;
-    axios.get(request).then(response => {
+    console.log(s);
+    let request = `http://localhost:9000/add`;
+    axios.post(request, s).then(response => {
       console.log(response.data);
-      // debugger;
-      if (Array.isArray(response.data)) {
-        this.setState({
-          githubData:
-            response.data.length >= 1
-              ? response.data
-              : "User Found, but there is no repo"
-        });
-      } else {
-        this.setState({
-          githubData: "User is not Found"
-        });
-      }
+      this.setState({
+        githubData: response.data
+      });
+    });
+  };
+
+  deleteRepo = id => {
+    console.log(id);
+    console.log(this.state.githubData);
+    let request = `http://localhost:9000/delete/${id}`;
+    // console.log(request);
+    axios.delete(request).then(response => {
+      console.log(response.data);
+      this.setState({
+        githubData: response.data
+      });
     });
   };
 
   render() {
-    let renderComponent = "";
-
-    if (this.state.githubData === "User is not Found")
-      renderComponent = <h1> "User is not Found" </h1>;
-
-    if (this.state.githubData === "User Found, but there is no repo")
-      renderComponent = <h1> "User Found, but there is no repo" </h1>;
-
-    if (Array.isArray(this.state.githubData))
-      renderComponent = (
-        <Table data={this.state.githubData} flip={this.changePrivate} />
-      );
+    let renderComponent = (
+      <Table
+        data={this.state.githubData}
+        flip={this.changePrivate}
+        delete={this.deleteRepo}
+      />
+    );
 
     return (
       <div className="container">
