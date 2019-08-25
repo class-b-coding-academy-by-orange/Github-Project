@@ -15,23 +15,26 @@ export default class App extends Component {
 
       .then(response => {
         this.setState({ repos: response.data })
-        console.log("repo take the data")
+        console.log("repo taken the data")
       })
       .catch(error => {
         console.error("Error")
       });
+      console.log(this.state)
   }
 
 
   addRepos = (title, language, status,reset) => {
     title = encodeURIComponent(title);
     language = encodeURIComponent(language);
-    status = encodeURIComponent(status);
-
-    axios.post(`http://localhost:9000/Repos/${title}/${language}/${status}`)
+    //status = encodeURIComponent(status);
+    console.log(status)
+    axios.post(`http://localhost:9001/Repos/${title}/${language}/${status}`)
 
       .then(response => {
-        console.log("the data added")
+        this.setState({ repos: response.data });
+        console.log('djsmnvbv')
+
       })
       .catch(error => {
         console.error("the data didn't add")
@@ -67,6 +70,7 @@ export default class App extends Component {
     const {getRepos , addRepos , deleteRepos , updateRepos}=this
     return (
       <div>
+        {console.log("app",this.state.repos)}
        <center><button style={{width:'35%'}} type="button" 
                 className="btn btn-success btn-lg" onClick={getRepos} >Get All Repo</button> </center> 
 

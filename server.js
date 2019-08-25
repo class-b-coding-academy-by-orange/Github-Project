@@ -38,14 +38,16 @@ app.get('/Repos', (req, res) => {
 
 //post (create new data)
 app.post('/Repos/:title/:language/:status', (req, res) => {
+  console.log('SBANEH')
 
   let title = encodeURIComponent(req.params.title);
   let language = encodeURIComponent(req.params.language);
   let status = encodeURIComponent(req.params.status);
+console.log(status)
+  
   //encodeURIComponent = function Required. The URI to be encoded
-
-  mongo.newRepos((result) => {
-     res.json(result);
+  mongo.newRepos(result => {
+     res.json(result)
    },title,language,status)
 });
 
@@ -77,5 +79,5 @@ app.put('/Repos/:id/:status', (req, res) => {
 
 
 
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 9001;
 app.listen(PORT, () => console.log(`Server listening to ${PORT}`));

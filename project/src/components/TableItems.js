@@ -7,7 +7,8 @@ export default class Item extends Component {
         const {items,id,deleteRepos,changestatus}=this.props;
       return (
         <React.Fragment>
-          <tr>
+{        console.log("STATE", items)
+}          <tr>
           <td>{id+1}</td>
           <td>{items.title}</td>
           <td>{items.status ? "private" : "public" }</td>
