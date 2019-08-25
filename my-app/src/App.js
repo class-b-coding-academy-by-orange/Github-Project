@@ -1,49 +1,91 @@
-import React, {
-  Component
-} from 'react';
-//import Search from './components/Search';
-import Table from './components/Table';
+import React, {Component} from 'react';
+import Tablee from './component/Tablee';
 import axios from 'axios';
-
-class App extends Component {
-  state = {
-    data : []
-  }
+import Button from 'react-bootstrap/Button'
 
 
-  userChange=()=>{
-    let request = `http://localhost:9000/tasks`;
-
-    axios
-      .get(request)
-      .then(response => {
-        console.log(response.data)
-
-        this.setState({
-          data: response.data
-        });
-      })
-      .catch(error => {
-        console.log('react error')
-        
-      });
-    console.log(this.state)
-  }
-
-  
-
-  render() {
-    const {data} = this.state
-    return ( 
-    <div>
-      {/* <Search userChange={this.userChange}/> */}
-      <button className="btn btn-outline-secondary"onClick={this.userChange}>Get all repo</button> 
-      <Table myData = {data} /> 
-      
-    </div>
-
-    );
-  }
+export default class App extends Component {
+state={
+  repo:[],
 }
 
-export default App;
+
+
+  getdata = () => {
+    axios.get(`http://localhost:9000/task`)
+
+      .then(response => {
+        this.setState({ repo: response.data })
+        //console.log(this.state.repo)
+        console.log("react","1")
+      })
+      .catch(error => {
+        console.error("react","eror")
+      });
+  }
+
+
+  adddata = (title, language, status,reset) => {
+    console.log("react",title, language, status)
+    title = encodeURIComponent(title);
+    language = encodeURIComponent(language);
+    status = encodeURIComponent(status);
+
+    axios.post(`http://localhost:9000/task/${title}/${language}/${status}`)
+
+      .then(response => {
+        console.log("react","complet add");
+        this.setState({ repo: response.data })
+
+      })
+      .catch(error => {
+        console.error("react","not complet add")
+      });
+      reset()
+  }
+
+
+  deletdata = (id) => {
+    console.log("react",id)
+    id = encodeURIComponent(id);
+
+    axios.delete(`http://localhost:9000/task/${id}`)
+
+      .then(response => {
+        // this.setState({ repo: response.data })
+        //console.log(this.state.repo)
+        console.log("react","complet delet");
+        this.setState({ repo: response.data })
+
+
+      })
+    }
+
+    updatedata = (id,status) => {
+    console.log("react",id,status)
+    id = encodeURIComponent(id);
+    status = encodeURIComponent(!status);
+
+    axios.put(`http://localhost:9000/task/${id}/${status}`)
+
+      .then(response => {
+        // this.setState({ repo: response.data })
+        //console.log(this.state.repo)
+        console.log("react", "complet update");
+        this.setState({ repo: response.data })
+
+
+      })
+    }
+
+
+
+  render() {
+    return (
+      <div>
+      <br></br>
+       <Tablee repo={this.state.repo} adddata={this.adddata} deletdata={this.deletdata} updatedata={this.updatedata}/>
+      <Button variant="outline-primary"  size="lg" block  onClick={this.getdata} >Get All Repo</Button>
+
+      </div>
+    )}}
