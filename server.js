@@ -2,17 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongo = require("./database");
 const axios = require("axios");
-// var bodyParser = require("body-parser");
 
 const app = express();
-
-// app.use(
-//   bodyParser.urlencoded({
-//     extended: true
-//   })
-// );
-
-// app.use(bodyParser.json());
 
 app.use(express.json());
 
@@ -30,12 +21,6 @@ app.get("/Repos", (req, res) => {
   });
 });
 
-app.get("/Repos", (req, res) => {
-  mongo.getRepos(result => {
-    res.json(result);
-  });
-});
-
 app.post("/add", (req, res) => {
   let repo = req.body;
   mongo.postRepo(repo, result => {
@@ -43,16 +28,17 @@ app.post("/add", (req, res) => {
   });
 });
 
-app.post("/data1", (req, res) => {
-  let repo = req.body;
-  mongo.postOneRepo(repo, result => {
+app.put("/update/:id", (req, res) => {
+  let repo = req.params.id;
+  // console.log(repo);
+  mongo.updateRepo(repo, result => {
     res.json(result);
   });
 });
 
 app.delete("/delete/:id", function(req, res) {
   let repoId = req.params.id;
-  console.log(repoId);
+  // console.log(repoId);
   mongo.deleteRepo(repoId, result => {
     res.json(result);
   });

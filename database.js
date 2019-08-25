@@ -22,18 +22,18 @@ let ReposSchema = new mongoose.Schema({
 let Repos = mongoose.model("repos", ReposSchema);
 
 let getIniRepos = cb => {
-  console.log(cb);
+  // console.log(cb);
   Repos.insertMany(arr, function(error, docs) {});
   getRepos(cb);
 };
 
 let getRepos = async cb => {
   try {
-    console.log("1");
+    // console.log("1");
     let allRepos = await Repos.find({});
-    console.log("2");
+    // console.log("2");
     cb(allRepos);
-    console.log("3");
+    // console.log("3");
   } catch (error) {
     cb(error);
   }
@@ -58,12 +58,15 @@ let deleteRepo = (repoId, cb) => {
   getRepos(cb);
 };
 
-let updateRepo = (repoId, cb) => {
-  // Repos.findOneAndUpdate(repoId, update, {
-  //   state = !state
-  // });
-  // getRepos(cb);
+let updateRepo = async (repoId, cb) => {
+  const upd = await Repos.findOne({ _id: repoId });
+  upd.state = !upd.state;
+  const saved = await upd.save();
+  getRepos(cb);
 };
+// Repos.findOneAndUpdate(repoId, update, {
+//   state = !state
+// });
 
 let arr = [
   {

@@ -19,7 +19,7 @@ class Table extends Component {
 
         <tbody>
           {this.props.data.map((repo, index) => {
-            console.log(repo._id);
+            // console.log(repo._id);
             return (
               <Row
                 id={index + 1}

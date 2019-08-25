@@ -5,7 +5,7 @@ class Row extends Component {
   state = {};
 
   handleToggle = i => {
-    console.log(i);
+    // console.log(i);
     this.props.flip(i);
   };
 
@@ -20,10 +20,10 @@ class Row extends Component {
           <td>
             {" "}
             <input
-              onChange={() => this.handleToggle(this.props.id)}
+              onChange={() => this.handleToggle(this.props.deleteId)}
               type="checkbox"
               aria-label="Checkbox for following text input"
-              checked
+              checked={this.props.private}
             />{" "}
           </td>
         ) : (
@@ -33,6 +33,7 @@ class Row extends Component {
               onChange={() => this.handleToggle(this.props.deleteId)}
               type="checkbox"
               aria-label="Checkbox for following text input"
+              checked={this.props.private}
             />{" "}
           </td>
         )}

@@ -11,40 +11,35 @@ class mainApp extends Component {
     reposExist: false
   };
 
-  changePrivate = id => {
-    console.log(id);
-    console.log(this.state.githubData);
-    // let i = this.state.githubData.map(
-    //   (elem,
-    //   index => {
-    //     if (elem._id === id) return index;
-    //   })
-    // );
-    // let p = this.state.githubData[i].state;
-    // console.log(p);
-    //   if ( ){
-    //   axios.put(`http://localhost:9000/apdate/${id}`, {
-    //     state: bar
-    // })}
-    // axios
-    //   .put("https://reqres.in/api/users/2", {
-    //     name: "Atta Shah",
-    //     job: "MEAN Stack Developer"
-    //   })
-    //   .then(response => {
-    //     console.log(response.data);
-    //     this.setState({
-    //       githubData: response.data
-    //     });
-    //   });
+  // axios
+  //   .put("https://reqres.in/api/users/2", {
+  //     name: "Atta Shah",
+  //     job: "MEAN Stack Developer"
+  //   })
+  //   .then(response => {
+  //     console.log(response.data);
+  //     this.setState({
+  //       githubData: response.data
+  //     });
+  //   });
 
-    // this.setState({
-    //   githubData: this.state.githubData.map((elem, index) => {
-    //     if (index === id) elem.private = !elem.private;
-    //     return elem;
-    //   })
-    // });
-    // console.log(this.state);
+  // this.setState({
+  //   githubData: this.state.githubData.map((elem, index) => {
+  //     if (index === id) elem.private = !elem.private;
+  //     return elem;
+  //   })
+  // });
+  // console.log(this.state);
+
+  changePrivate = id => {
+    // console.log("id", id);
+    // console.log(this.state.githubData);
+    axios.put(`http://localhost:9000/update/${id}`).then(response => {
+      // console.log(response.data);
+      this.setState({
+        githubData: response.data
+      });
+    });
   };
 
   // componentDidMount = () => {
@@ -89,10 +84,10 @@ class mainApp extends Component {
   };
 
   AddRequest = s => {
-    console.log(s);
+    // console.log(s);
     let request = `http://localhost:9000/add`;
     axios.post(request, s).then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       this.setState({
         githubData: response.data
       });
@@ -100,8 +95,8 @@ class mainApp extends Component {
   };
 
   deleteRepo = id => {
-    console.log(id);
-    console.log(this.state.githubData);
+    // console.log(id);
+    // console.log(this.state.githubData);
     let request = `http://localhost:9000/delete/${id}`;
     // console.log(request);
     axios.delete(request).then(response => {
