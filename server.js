@@ -21,9 +21,17 @@ app.get('/tasks', (req, res) => {
 
 // Start your code below
 
+app.get('/row' , (req,res)=>{
+mongo.firstrow((result)=>{
+res.json(result)
+})})
 
-
-
+app.get('/tasks', (req, res) => {
+  console.log('server')
+  mongo.getTasks((result) => {
+    res.json(result);
+  })
+});
 
 
 
