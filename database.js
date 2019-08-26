@@ -44,3 +44,88 @@ module.exports = {
 // Start your code below
 
 
+let tasksSchema = new mongoose.Schema({
+  title: String,
+  language: String,
+  status: Boolean,
+});
+
+let Tasks = mongoose.model('tasks', tasksSchema);
+
+let creatTasks = (cb) => {
+  Tasks.create({title: "array",
+    language: "HTML",
+    status: true,},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(data)
+    }
+  })
+}
+
+
+let getTasks = (cb) => {
+  Tasks.find({}, (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      cb(data)
+    }
+  })
+}
+
+let newcreate = (cb,title,language,status) => {
+  console.log("mongo",title,language,status)
+  console.log("mongo", title)
+  Tasks.create({title: title,
+  language:language,
+status:status},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getTasks(cb);
+      
+    }
+  })
+}
+
+
+let deletetask = (cb,id) => {
+  console.log("mongo", "id",id)
+  Tasks.deleteOne({_id: id,},
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getTasks(cb);
+
+    }
+  })
+}
+
+let updatetask = (cb,id,status) => {
+  console.log( "mongo", "id",id)
+  console.log("mongo", "status",status)
+
+  Tasks.updateOne({_id: id,}, { $set: { status: status } },
+
+     (err, data) => {
+    if (err) {
+      cb(err)
+    } else {
+      getTasks(cb);
+      console.log("mongo","status 2",status)     
+    }
+  })
+}
+
+module.exports = {
+  creatTasks,
+  getTasks,
+  newcreate,
+  deletetask,
+  updatetask,
+}
