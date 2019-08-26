@@ -10,20 +10,39 @@ app.get('/', (req, res) => {
   res.json('server is working');
 });
 
-/*
+
 //Example get request with database
-app.get('/tasks', (req, res) => {
-  mongo.getTasks((result) => {
+app.get('/Repos', (req, res) => {
+  mongo.getRepos((result) => {
     res.json(result);
   })
 });
-*/
+
 
 // Start your code below
 
 
+app.post('/Repos', (req, res) => {
+  let newTask = req.body;
+  mongo.addRepos(newTask, (result) => {
+    res.json(result);
+  })
+});
+
+app.delete('/Repos/:id', (req, res) => {
+  let id = req.params.id
+  mongo.delRepo(id, (result) => {
+    res.json(result);
+  })
+});
 
 
+app.put('/Repos', (req, res) => {
+  let edit = req.body._id
+  mongo.updateRepo(edit, (result) => {
+    res.json(result);
+  })
+});
 
 
 

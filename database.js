@@ -13,20 +13,21 @@ db.once('open', function () {
   console.log('____________________________')
 });
 
-/*
+
 // Example schema
-let tasksSchema = new mongoose.Schema({
+let reposSchema = new mongoose.Schema({
   title: String,
-  age: Number,
-  isCompleted: Boolean,
+  state: String,
+  isPrivate: Boolean,
+  language: String,
 });
 
 // Example modal
-let Tasks = mongoose.model('tasks', tasksSchema);
+let Repos = mongoose.model('repos', reposSchema);
 
 // Example function
-let getTasks = (cb) => {
-  Tasks.find({}, (err, data) => {
+let getRepos = (cb) => {
+  Repos.find({}, (err, data) => {
     if (err) {
       cb(err)
     } else {
@@ -35,11 +36,48 @@ let getTasks = (cb) => {
   })
 }
 
+// Example function
+
+let addRepos = (repo, cb) => {
+  Repos.create(repo, (err, result) => {
+    if (err) {
+      cb(err)
+    } else {
+      // console.log('RESULT:', result)
+      // cb(result)
+      getRepos(cb)
+    }
+  })
+}
+
+let delRepo = (id, cb) => {
+  Repos.deleteOne({_id:id}, (err, result) => {
+    if(err){
+      cb(err)
+    } else {
+      // cb(result)
+      getRepos(cb)
+    }
+  })
+}
+
+let updateRepo = (repo, cb) => {
+  Repos.update(repo, (err, result) => {
+    if(err){
+      cb(err)
+    } else {
+      // cb(result)
+      getRepos(cb)
+    }
+  })
+}
 // example of module.export
 module.exports = {
-  getTasks
+  getRepos,
+  addRepos,
+  delRepo,
+  updateRepo
 }
-*/
 
 // Start your code below
 
