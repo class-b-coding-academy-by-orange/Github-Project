@@ -21,7 +21,34 @@ app.get('/tasks', (req, res) => {
 
 // Start your code below
 
+app.get('/repo', (req, res) => {
 
+  console.log("git requst")
+  mongo.getRepo((result) => {
+    res.json(result);
+  })
+});
+
+app.post("/repo", (req, res) => {
+  const newRepo = req.body;
+  mongo.addRepo(newRepo,(result)=> {
+    res.json(result);
+  });
+});
+
+
+app.put('/repo/:id',(req,res)=>{
+  let id =req.params.id;
+  mongo.updateRepo(id,(result)=>{
+    res.json(ruselt);
+  })
+})
+app.delete("/repo",  (req, res) => {
+  let id = req.body
+  mongo.deleteRepo(id, result => {
+    res.json(result);
+  });
+});
 
 
 
